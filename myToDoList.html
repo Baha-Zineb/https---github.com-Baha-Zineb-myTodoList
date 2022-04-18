@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>TOdo List</title>
+
+        <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="myToDoList.css">
+    </head>
+    <body>  
+        <body>
+            <div class = 'container'>
+                <h1>To Do List</h1>
+                   
+                    <form class="addTask">
+                        <div class="err"></div>
+                        <input type="text" name="todoInput" class="todoInput" placeholder="Enter a Task"/>
+                        <button class="addTaskButt" type="submit"> <i class = 'fa fa-plus-square'></i> </button>
+                        <button class="deleteAllButt" type="submit"> <i class = 'fa fa-trash'></i> </button>
+
+                    </form>
+                
+                    <br/>
+                <div class="todoContainer">
+                    <ul class="todoList"></ul>
+                </div>
+            </div>
+              
+            </body>
+    </body>
+</html>
+
+<script>
+ var input = document.querySelector('.todoInput');
+ var button = document.querySelector('.addTaskButt');
+ var list = document.querySelector('.todoList');
+ var deleteAll = document.querySelector('.deleteAllButt')
+ 
+ button.addEventListener('click',addTodo);
+ deleteAll.addEventListener('click',deleteAB);
+
+
+ function addTodo(event)
+ {
+    event.preventDefault();
+
+     if(input.value.trim() == "")
+     {
+        alert('Please enter a task');
+     }
+     else{
+        todoDiv = document.createElement('div');
+        todoDiv.classList.add('todoDiv');
+
+        newTodo = document.createElement('li');
+        newTodo.classList.add('todoItem');
+
+        newTodo.innerText = input.value;
+
+        deleteButton = document.createElement('button');
+        deleteButton.innerHTML = '<i class = "fa fa-trash"></i>';
+        deleteButton.classList.add('deleteButton');
+        deleteButton.type = "submit";
+
+
+        modifyButton = document.createElement('button');
+        modifyButton.innerHTML = '<i class="fa fa-edit"></i>';
+        modifyButton.classList.add('modifyButton');
+        modifyButton.type = 'submit';
+
+
+        todoDiv.appendChild(newTodo);
+
+        todoDiv.appendChild(deleteButton);
+        todoDiv.appendChild(modifyButton);
+
+        list.appendChild(todoDiv);
+        input.value = "";
+     }
+    
+    deleteButton.addEventListener('click', function(){
+				const parent = this.parentNode;
+                
+				parent.remove();
+			});
+
+    modifyButton.addEventListener('click', function(){
+        const parent = this.parentNode;
+        const tab = this.parentNode.children;
+        var editValue = prompt('edit the select item', tab[0].firstChild.nodeValue);
+    tab[0].firstChild.nodeValue = editValue;
+	});
+
+ }
+
+function deleteAB(event)
+{
+    list.remove();
+}
+
+</script>
+
+
+
+
+
+
+
